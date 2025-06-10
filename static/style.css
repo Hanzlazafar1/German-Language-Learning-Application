@@ -1,0 +1,156 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #f1f1f1;
+    margin: 0;
+    padding: 40px;
+    text-align: center;
+}
+
+.container {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #00bcd4;
+}
+
+h1 span {
+    color: #fdd835;
+}
+
+.intro {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #cccccc;
+}
+
+.main-buttons {
+    margin-bottom: 25px;
+}
+
+.main-btn {
+    text-decoration: none;
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.translate-btn {
+    background-color: #00bcd4;
+    color: #121212;
+}
+
+.translate-btn:hover {
+    background-color: #0097a7;
+}
+
+.challenge-btn {
+    background-color: #fdd835;
+    color: #121212;
+}
+
+.challenge-btn:hover {
+    background-color: #fbc02d;
+}
+
+textarea {
+    width: 100%;
+    padding: 18px;
+    font-size: 16px;
+    background-color: #2b2b2b;
+    color: #f1f1f1;
+    border: 2px solid #333;
+    border-radius: 10px;
+    resize: none;
+    margin-top: 10px;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    font-size: 16px;
+    background-color: #00bcd4;
+    color: #121212;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #0097a7;
+}
+
+.output, .translated-box {
+    margin-top: 35px;
+    text-align: left;
+}
+
+.output h3 {
+    font-size: 1.5em;
+    color: #fdd835;
+    margin-bottom: 10px;
+}
+
+.translated-box {
+    background-color: #2b2b2b;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #444;
+    font-size: 16px;
+    white-space: pre-wrap;
+}
+
+footer {
+    margin-top: 50px;
+    font-size: 14px;
+    color: #888;
+}
+
+.question-block {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.question-block input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #2b2b2b;
+    color: #fff;
+    border: 1px solid #444;
+    margin-top: 5px;
+}
+
+.result-table {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.result-row {
+    background-color: #1c1c1c;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.result-row.correct {
+    border-left: 5px solid #4caf50;
+}
+
+.result-row.wrong {
+    border-left: 5px solid #f44336;
+}

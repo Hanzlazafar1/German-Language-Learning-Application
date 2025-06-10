@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily German Challenge 🇩🇪</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f7fa;
+            --accent-color: #ffcc00;
+            --text-color: #333;
+            --bg-color: white;
+        }
+
+        body.dark-mode {
+            --primary-color: #4a90e2;
+            --secondary-color: #1e1e1e;
+            --accent-color: #ffd700;
+            --text-color: #f0f0f0;
+            --bg-color: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 600;
+        }
+
+        .navbar .toggle {
+            cursor: pointer;
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 0.4rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .toggle:hover {
+            background-color: #e6b800;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 2rem auto;
+            background-color: var(--bg-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .intro {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .refresh-btn {
+            display: block;
+            margin: 0 auto 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background-color: #3b77c3;
+        }
+
+        .mcq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .question-card {
+            background-color: var(--secondary-color);
+            border: 1px solid #ccc;
+            padding: 1.2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .options {
+            list-style: none;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .option {
+            margin: 0.5rem 0;
+        }
+
+        .answer {
+            display: none;
+            background-color: #fff7cc;
+            padding: 0.7rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+
+        .show-btn {
+            background-color: var(--accent-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            padding-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navbar a {
+                margin: 0.5rem 0;
+            }
+
+            .container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">📘 Translate</a>
+            <a href="{{ url_for('daily_challenge') }}">🌟 Daily Challenge</a>
+        </div>
+        <button class="toggle" onclick="toggleTheme()">🌙 Toggle Theme</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>🌟 Daily German Challenge</h1>
+        <p class="intro">
+            Test your German with 10 fun multiple-choice questions, refreshed daily to help you grow your skills.
+        </p>
+
+        <form action="/daily-challenge" method="get">
+            <button class="refresh-btn">🔄 New Challenge</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <div class="mcq-list">
+            {% for mcq in mcqs %}
+                <div class="question-card">
+                    <div class="question">{{ loop.index }}. {{ mcq.question }}</div>
+                    <ul class="options">
+                        {% for option in mcq.options %}
+                            <li class="option">🔹 {{ option }}</li>
+                        {% endfor %}
+                    </ul>
+                    <p class="answer">✅ Answer: {{ mcq.answer }}</p>
+                    <button class="show-btn" onclick="showAnswer(this)">Show Answer</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        Made with ❤️ by <strong>Hanzla Zafar</strong> | © 2025 German Learning App
+    </footer>
+
+    <script>
+        function showAnswer(btn) {
+            const answer = btn.previousElementSibling;
+            answer.style.display = 'block';
+            btn.style.display = 'none';
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
+</body>
+</html>
